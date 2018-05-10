@@ -45,7 +45,7 @@ class LearningFireWall2 (LearningSwitch):
 				if icmp is not None:
 					dstIp = ip.dstip
 					if icmp.type == 8:
-						if dstIp == '100.0.0.11' or dstIp =='100.0.0.12':
+						if dstIp == '100.0.0.11' or dstIp =='100.0.0.10':
 							super(LearningFireWall2, self)._handle_PacketIn(event)	 
 							print("f2 p1: request icmp packet transmiited successful.")
 							return
@@ -118,7 +118,7 @@ class LearningFireWall2 (LearningSwitch):
 				if icmp is not None:
 					dstIp = ip.dstip
 					if icmp.type == 0:			
-						if dstIp == '100.0.0.11' or dstIP =='100.0.0.12':
+						if dstIp == '100.0.0.11' or dstIP =='100.0.0.10':
 							super(LearningFireWall2, self)._handle_PacketIn(event)
 							return
 						else:
@@ -126,7 +126,7 @@ class LearningFireWall2 (LearningSwitch):
 							return
 					
 					elif icmp.type == 8:
-						if dstIp == '100.0.0.11' or dstIp =='100.0.0.12':
+						if dstIp == '100.0.0.11' or dstIp =='100.0.0.10':
 							super(LearningFireWall2, self)._handle_PacketIn(event)	 
 							print("f2 p2: request icmp packet is transmitted successful.")
 							return
