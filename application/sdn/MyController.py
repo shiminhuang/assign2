@@ -45,7 +45,8 @@ class MyController (object):
 		elif (dpid == 10):
 			#Popen(["click",path+"napt.click"])
 			#LearningSwitch(event.connection, False)
-			os.system('sudo /usr/local/bin/click /home/click/ik2220-assign-phase1-team3-1/ik2220-assign-phase1-team3/application/nfv/napt.click &')
+			Popen(["sudo","/usr/local/bin/click","/home/click/ik2220-assign-phase1-team3-1/ik2220-assign-phase1-team3/application/nfv/napt.click"])
+			#os.system('sudo /usr/local/bin/click /home/click/ik2220-assign-phase1-team3-1/ik2220-assign-phase1-team3/application/nfv/napt.click &')
 			log.debug("NAPT triggered.")
 		else:
 			log.debug("Network entity is an unknown entity", dpid)
