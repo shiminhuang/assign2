@@ -3,6 +3,7 @@ from mininet.net import Mininet
 from mininet.node import RemoteController
 from mininet.cli import CLI
 from mininet.log import setLogLevel, info
+from mininet.node import OVSSwitch
 import sys
 import time
 import os
@@ -26,15 +27,15 @@ class MyTopo(Topo):
 		lb1=self.addSwitch('s4')
 		sw3=self.addSwitch('s5')
 		ids=self.addSwitch('s6')
-		insp=self.addHost('h11', ip='100.0.0.30/24', mac='00:00:00:00:00:30')
+		insp=self.addHost('insp', ip='100.0.0.30/24', mac='00:00:00:00:00:30')
 		lb2=self.addSwitch('s7')
 		sw4=self.addSwitch('s8')
-		ds1=self.addHost('h5',ip='100.0.0.20/24', mac='00:00:00:00:00:20')
-		ds2=self.addHost('h6',ip='100.0.0.21/24', mac='00:00:00:00:00:21')
-		ds3=self.addHost('h7',ip='100.0.0.22/24', mac='00:00:00:00:00:22')
-		ws1=self.addHost('h8',ip='100.0.0.40/24', mac='00:00:00:00:00:40')
-		ws2=self.addHost('h9',ip='100.0.0.41/24', mac='00:00:00:00:00:41')
-		ws3=self.addHost('h10',ip='100.0.0.42/24', mac='00:00:00:00:00:42')
+		ds1=self.addHost('ds1',ip='100.0.0.20/24', mac='00:00:00:00:00:20')
+		ds2=self.addHost('ds2',ip='100.0.0.21/24', mac='00:00:00:00:00:21')
+		ds3=self.addHost('ds3',ip='100.0.0.22/24', mac='00:00:00:00:00:22')
+		ws1=self.addHost('ws1',ip='100.0.0.40/24', mac='00:00:00:00:00:40')
+		ws2=self.addHost('ws2',ip='100.0.0.41/24', mac='00:00:00:00:00:41')
+		ws3=self.addHost('ws3',ip='100.0.0.42/24', mac='00:00:00:00:00:42')
 
 	# private zone
 		fw2=self.addSwitch('s9')
@@ -73,4 +74,30 @@ class MyTopo(Topo):
 		self.addLink(sw5,h4)
 		
 
-topos={'mytopo':( lambda: MyTopo())}
+
+def Phase2():
+	c0 = RemoteController('c0', ip='127.0.0.1', port=6633)
+	net = Mininet(topo=MyTopo(), controller=c0, switch=OVSSwitch)
+
+	net.start()
+	ds1 = net.get('ds1')
+	ds2 = net.get('ds2')
+	ds3 = net.get('ds3')
+	ws1 = net.get('ws1')
+	ws2 = net.get('ws2')
+	ws3 = net.get('ws3')
+
+	ds1.cmd('python ds1.py &')
+	ds2.cmd('python ds2.py &')
+	ds3.cmd('python ds3.py &')
+	ws1.cmd('python -m SimpleHTTPServer 80 &')
+	ws2.cmd('python -m SimpleHTTPServer 80 &')
+	ws3.cmd('python -m SimpleHTTPServer 80 &')
+
+	CLI(net)
+
+	net.stop()
+
+if __name__ == '__main__':
+	setLogLevel('info')
+	Phase2()

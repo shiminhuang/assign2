@@ -80,7 +80,7 @@ class LearningFireWall1 (LearningSwitch):
 					print("The ACK flag is %s" %f)
 					if f == False:
 						if dstPort == 80:
-							if dstIp == '100.0.0.40' or dstIp == '100.0.0.41' or dstIp == '100.0.0.42' or dstIp == '100.0.0.45':
+							if dstIp == '100.0.0.40' or dstIp == '100.0.0.41' or dspIp == '100.0.0.42' or dstIp == '100.0.0.45':
 								super(LearningFireWall1, self)._handle_PacketIn(event)
 								print("f1 p1: A packet is transmitted from (%s) to (%s) port (%s) by tcp protocol:success." %(srcIp,dstIp,dstPort))
 								log.debug("f1 p1: A packet is transmitted from (%s) to (%s) port (%s) by tcp protocol." %(srcIp,dstIp,dstPort))

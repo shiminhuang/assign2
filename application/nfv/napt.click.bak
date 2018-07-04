@@ -18,8 +18,8 @@ to_Prz :: Queue -> aveCounter_to_Prz -> ToDevice(s10-eth2);
 from_Prz :: FromDevice(s10-eth2, METHOD LINUX, SNIFFER false);
 to_Dmz :: Queue -> aveCounter_to_Dmz -> ToDevice(s10-eth1);
 
-arpQuery_toDmz_eth1::ARPQuerier(100.0.0.1, 00:00:00:22:22:01);
-arpQuery_toPrz_eth2::ARPQuerier(10.0.0.1, 00:00:00:22:22:02);
+arpQuery_toDmz_eth1::ARPQuerier(100.0.0.1, 00:00:00:22:20:01);
+arpQuery_toPrz_eth2::ARPQuerier(10.0.0.1, 00:00:00:22:20:02);
 
 
 //Packet Classifier
@@ -44,7 +44,7 @@ from_Dmz ->
 	
 	//arp query
 	eth_Dmz_classifier[0] ->
-		arp_Query_eth1 -> ARPResponder(100.0.0.1 00:00:00:22:22:01) -> arp_Query_afterRsp_eth1 -> to_Dmz;
+		arp_Query_eth1 -> ARPResponder(100.0.0.1 00:00:00:22:20:01) -> arp_Query_afterRsp_eth1 -> to_Dmz;
 	
 	//arp response
 	eth_Dmz_classifier[1] ->
@@ -76,7 +76,7 @@ from_Prz ->
 	
 	//arp query
 	eth_Prz_classifier[0] -> 
-		arp_Query_eth2 -> ARPResponder(10.0.0.1 10.0.0.0/24 00:00:00:22:22:02) -> arp_Query_afterRsp_eth2 -> to_Prz;
+		arp_Query_eth2 -> ARPResponder(10.0.0.1 10.0.0.0/24 00:00:00:22:20:02) -> arp_Query_afterRsp_eth2 -> to_Prz;
 	
 	//arp response
 	eth_Prz_classifier[1] ->

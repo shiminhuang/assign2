@@ -1,5 +1,5 @@
 topo:
-	sudo mn --custom MyTopo.py --topo mytopo --controller remote
+	sudo python MyTopo.py
 clean: 
 	sudo mn -c
 

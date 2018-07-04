@@ -39,12 +39,12 @@ class MyController (object):
 			log.debug("Load Balancer Web Servers triggered.")
 		elif (dpid == 6):
 			#LearningSwitch(event.connection, False)
-			Popen(["sudo","/usr/local/bin/click","/home/click/ik2220-assign-phase2-team3/application/nfv/ids.click"])
+			Popen(["sudo","/usr/local/bin/click",+"/home/click/ik2220-assign-phase2-team3/application/nfv/ids.click"])
 			log.debug("IDS triggered.")
 		elif (dpid == 10):
 			#Popen(["click",path+"napt.click"])
 			#LearningSwitch(event.connection, False)
-			Popen(["sudo","/usr/local/bin/click","/home/click/ik2220-assign-phase2-team3/application/nfv/napt.click"])
+			Popen(["sudo","/usr/local/bin/click",+"/home/click/ik2220-assign-phase2-team3/application/nfv/napt.click"])
 			log.debug("NAPT triggered.")
 		else:
 			log.debug("Network entity is an unknown entity", dpid)
